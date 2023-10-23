@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Halaman Formulir</title>
+</head>
+
+<body>
+    <header>
+        <h1>CariMobil.com</h1>
+        <img src="mobil.png" alt="Logo Website" class="fotobulat">
+    </header>
+    <div class="navsidebar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="form.html">Pencarian</a></li>
+            <li><a href="table.html">Daftar Mobil</a></li>
+        </ul>
+    </div>
+    <main>
+        <h2>Formulir Pendaftaran</h2>
+        <form id="form">
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" required><br>
+
+            <label for="merek">merek:</label>
+            <input type="text" id="merek" name="merek" required><br>
+
+            <label for="type">type:</label>
+            <input type="text" id="type" name="type" required><br>
+            
+            <label for="kapasitasmesin">Kapasitas Mesin:</label>
+            <input type="text" id="kapasitasmesin" name="kapasitasmesin" required><br>
+
+            <label for="tipemesin">Tipe Mesin:</label>
+            <input type="text" id="tipemesin" name="tipemesin" required><br>
+
+            <label for="dayamesin">Daya Mesin:</label>
+            <input type="text" id="dayamesin" name="dayamesin" required><br>
+
+            <label for="torsi">Torsi:</label>
+            <input type="text" id="torsi" name="torsi" required><br>
+
+            <label for="tipebahanbakar">Tipe bahan bakar:</label>
+            <input type="text" id="tipebahanbakar" name="tipebahanbakar" required><br>
+
+            <label for="warna">Warna:</label>
+            <input type="text" id="warna" name="warna" required><br>
+
+
+
+
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; Hak Cipta 2023</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('form')
+        function postData() {
+            const nama = document.getElementById('nama').value;
+            const merek = document.getElementById('merek').value;
+            const type = document.getElementById('type').value;
+            const kapasitasmesin = document.getElementById('kapasitasmesin').value;
+            const tipemesin = document.getElementById('tipemesin').value;
+            const dayamesin = document.getElementById('dayamesin').value;
+            const torsi = document.getElementById('torsi').value;
+            const tipebahanbakar = document.getElementById('tipebahanbakar').value;
+            const warna = document.getElementById('warna').value;
+
+            const mobil = {
+                nama,
+                merek,
+                type,
+                kapasitasmesin,
+                tipemesin,
+                dayamesin,
+                torsi,
+                tipebahanbakar,
+                warna
+
+            };
+
+            let dataMobil = JSON.parse(localStorage.getItem('mobil')) || [];
+            dataMobil.push(mobil);
+            console.log(dataMobil);
+            localStorage.setItem('mobil', JSON.stringify(dataMobil));
+            form.reset();
+        };
+
+        const submitButton = document.querySelector('button[type="submit"]');
+        submitButton.addEventListener('click', postData);
+    </script>
+</body>
+
+</html>

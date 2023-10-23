@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Halaman Tabel</title>
+</head>
+
+<body>
+    <header>
+        <h1>CariMobil.com</h1>
+        <img src="mobil.png" alt="Logo Website" class="fotobulat">
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="form.html">Pencarian</a></li>
+            <li><a href="table.html">Daftar Mobil</a></li>
+        </ul>
+    </nav>
+    <div class="content-table">
+    </div>
+    <footer>
+        <p>&copy; Hak Cipta 2023</p>
+    </footer>
+
+    <script>
+        const kontenTable = document.querySelector('.content-table')
+
+        async function fetchMobil() {
+            let mobil = [];
+            const dataMobil = localStorage.getItem('mobil');
+
+            if (dataMobil) {
+                mobil = JSON.parse(dataMobil);
+            } else {
+                const mobil = [
+                    {
+                        nama: "HRV",
+                        merek: "Honda",
+                        type: "prestige",
+                        KapasitasMesin: "1000",
+                        TipeMesin: "V8",
+                        DayaMesin: "150",
+                        Torsi: "100",
+                        TipeBahanbakar: "bensin",
+                        Warna: "hitam",
+                    },
+                    {
+                        nama: "Civic",
+                        merek: "Honda",
+                        type: "sport",
+                        KapasitasMesin: "1000",
+                        TipeMesin: "V8",
+                        DayaMesin: "150",
+                        Torsi: "100",
+                        TipeBahanbakar: "bensin",
+                        Warna: "hitam",
+                    },
+                    {
+                        nama: "Avanza",
+                        merek: "Toyota",
+                        type: "MPV",
+                        KapasitasMesin: "1000",
+                        TipeMesin: "V8",
+                        DayaMesin: "150",
+                        Torsi: "100",
+                        TipeBahanbakar: "bensin",
+                        Warna: "hitam",
+                    },
+                    {
+                        nama: "Xenia",
+                        merek: "Daihatsu",
+                        type: "MPV",
+                        KapasitasMesin: "1000",
+                        TipeMesin: "V8",
+                        DayaMesin: "150",
+                        Torsi: "100",
+                        TipeBahanbakar: "bensin",
+                        Warna: "hitam",
+                    },
+                    {
+                        nama: "Pajero",
+                        merek: "Mitsubishi",
+                        type: "Dakar",
+                        KapasitasMesin: "1000",
+                        TipeMesin: "V8",
+                        DayaMesin: "150",
+                        Torsi: "100",
+                        TipeBahanbakar: "bensin",
+                        Warna: "hitam",
+                    },
+                    {
+                        nama: "Fortuner",
+                        merek: "Toyota",
+                        type: "Gr Sport",
+                        KapasitasMesin: "1000",
+                        TipeMesin: "V8",
+                        DayaMesin: "150",
+                        Torsi: "100",
+                        TipeBahanbakar: "bensin",
+                        Warna: "hitam",
+                    },
+                    {
+                        nama: "Stargazer",
+                        merek: "Hyundai",
+                        type: "MPV",
+                        KapasitasMesin: "1000",
+                        TipeMesin: "V8",
+                        DayaMesin: "150",
+                        Torsi: "100",
+                        TipeBahanbakar: "bensin",
+                        Warna: "hitam",
+                    },
+                    {
+                        nama: "CX5",
+                        merek: "Mazda",
+                        type: "sedan",
+                        KapasitasMesin: "1000",
+                        TipeMesin: "V8",
+                        DayaMesin: "150",
+                        Torsi: "100",
+                        TipeBahanbakar: "bensin",
+                        Warna: "hitam",
+                    },
+                    {
+                        nama: "Camry",
+                        merek: "Toyota",
+                        type: "sedan",
+                        KapasitasMesin: "1000",
+                        TipeMesin: "V8",
+                        DayaMesin: "150",
+                        Torsi: "100",
+                        TipeBahanbakar: "bensin",
+                        Warna: "hitam",
+                    },
+                    {
+                        nama: "Wrangler",
+                        merek: "JEEP",
+                        type: "Ofroad",
+                        KapasitasMesin: "1000",
+                        TipeMesin: "V8",
+                        DayaMesin: "150",
+                        Torsi: "100",
+                        TipeBahanbakar: "bensin",
+                        Warna: "hitam",
+                    }
+                ];
+                localStorage.setItem('mobil', JSON.stringify(mobil));
+            
+            }
+            return mobil;
+        }
+
+        async function PopulateTable() {
+            try {
+                const dataMobil = await fetchMobil();
+
+                const table = document.createElement('table');
+                const thead = document.createElement('thead');
+                const tbody = document.createElement('tbody');
+                const headerRow = document.createElement('tr');
+
+                for (const key in dataMobil[0]) {
+                    const th = document.createElement('th');
+                    th.textContent = key;
+                    headerRow.appendChild(th);
+                }
+
+                thead.appendChild(headerRow);
+
+                dataMobil.forEach(item => {
+                    const row = document.createElement('tr');
+                    for (const key in item) {
+                        const cell = document.createElement('td');
+                        cell.textContent = item[key];
+                        row.appendChild(cell);
+                    }
+                    tbody.appendChild(row);
+                });
+
+                table.appendChild(thead);
+                table.appendChild(tbody);
+
+                kontenTable.innerHTML = '';
+                kontenTable.appendChild(table);
+            } catch (error) {
+                console.error('Error', error);
+            }
+        }
+
+        PopulateTable();
+    </script>
+</body>
+
+</html>
